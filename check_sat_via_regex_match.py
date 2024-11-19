@@ -11,7 +11,7 @@ def construct_pattern(num_vars: int, clauses: list[list[int]]) -> str:
     :param num_vars: Number of variables in the CNF formula
     :param clauses: List of clauses in the CNF formula
 
-    :return: A regex pattern that matches a string of the form "FT,FT,FT,...;FT,FT,FT,..."
+    :return: A regex pattern that matches a string of the form "XYZ...;FT,FT,FT,..."
 
     # Example
 
@@ -31,6 +31,7 @@ def construct_pattern(num_vars: int, clauses: list[list[int]]) -> str:
     ```
     /
         ^( (F|T) (F|T) (F|T) );    # Capture values assigned to x1, x2, x3
+        (?=FT,FT,FT,FT$)            # Ensure that only valid input strings can be accepted
         (?: F\1 | F\2 | \3T ),     # Match FT if the assigned values satisfy clause 1
         (?: F\1 | \2T | F\3 ),     # Match FT if the assigned values satisfy clause 2
         (?: \1T | \2T | F\3 ),     # Match FT if the assigned values satisfy clause 3
