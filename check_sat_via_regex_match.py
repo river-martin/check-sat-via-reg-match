@@ -53,7 +53,7 @@ def construct_pattern(num_vars: int, clauses: list[list[int]]) -> str:
                 # Will match 'FT' if the non-negated literal is set to T
                 terms.append(rf"F\{literal}")
         clause_patterns.append(rf"(?:{'|'.join(terms)})")
-        pattern = rf'^{"(F|T)" * num_vars};' + f"(?={','.join('FT' for i in range(len(clause_patterns)))})"+ ",".join(clause_patterns)
+        pattern = rf'^{"(F|T)" * num_vars};' + f"(?={','.join('FT' for i in range(len(clause_patterns)))}$)"+ ",".join(clause_patterns)
     return pattern
 
 
